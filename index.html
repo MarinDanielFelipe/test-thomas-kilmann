@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¿Cómo manejas los conflictos? Modelo Thomas-Kilmann</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF2F5;--card:#fff;--ink:#16212B;--mut:#58677A;--line:#D3DCE4;--acc:#0E6B6B;--accbg:#DDF0EE;
+--comp:#C2412D;--col:#0E6B6B;--cmp:#B7791F;--elu:#6B7A8C;--acc2:#6A4BB5;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10171E;--card:#18222C;--ink:#E8EEF3;--mut:#9AABBB;--line:#2C3A47;--acc:#4DC2BB;--accbg:#173B3B;--comp:#F07A68;--col:#4DC2BB;--cmp:#E6B04F;--elu:#98A8BA;--acc2:#A892E8}}
+:root[data-theme="dark"]{--bg:#10171E;--card:#18222C;--ink:#E8EEF3;--mut:#9AABBB;--line:#2C3A47;--acc:#4DC2BB;--accbg:#173B3B;--comp:#F07A68;--col:#4DC2BB;--cmp:#E6B04F;--elu:#98A8BA;--acc2:#A892E8}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+main{max-width:720px;margin:0 auto;padding:28px 18px 60px}
+h1{font-size:clamp(1.9rem,6vw,2.8rem);line-height:1.08;margin:0 0 12px;font-weight:800;letter-spacing:-.02em}
+h2{font-size:1.25rem;margin:28px 0 8px;font-weight:600}
+p{margin:0 0 12px}
+.mut{color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:10px;padding:12px 22px;font-weight:600}
+.btn.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
+:root[data-theme="dark"] .btn,:root:not([data-theme="light"]) .btn{color:#06201F}
+button:focus-visible{outline:3px solid var(--acc2);outline-offset:2px}
+.prog{height:6px;background:var(--line);border-radius:3px;margin:0 0 20px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--acc);width:0;transition:width .3s}
+.sit{font-size:1.2rem;font-weight:600;margin:0 0 16px;line-height:1.35}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:13px 15px;margin:0 0 9px;transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--acc)}
+.opt.sel{border-color:var(--acc);background:var(--accbg);box-shadow:inset 3px 0 0 var(--acc)}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:14px}
+.hide{display:none}
+.map{position:relative;aspect-ratio:1/1;max-width:420px;margin:12px auto 6px;background:var(--card);border:1px solid var(--line);border-radius:6px}
+.map:before,.map:after{content:"";position:absolute;background:var(--line)}
+.map:before{left:50%;top:0;bottom:0;width:1px}.map:after{top:50%;left:0;right:0;height:1px}
+.q{position:absolute;font-size:.82rem;font-weight:600;padding:8px}
+.dot{position:absolute;width:22px;height:22px;border-radius:50%;background:var(--ink);border:4px solid var(--card);box-shadow:0 0 0 2px var(--ink);transform:translate(-50%,-50%);transition:left .8s,top .8s}
+.axl{text-align:center;font-size:.8rem;color:var(--mut)}
+.bar{display:grid;grid-template-columns:110px 1fr 70px;gap:10px;align-items:center;margin:8px 0;font-size:.92rem}
+.bar .t{height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar .t i{display:block;height:100%;border-radius:6px}
+.res-title{font-size:clamp(1.8rem,6vw,2.5rem);font-weight:800;margin:4px 0 4px;letter-spacing:-.02em}
+ul{padding-left:20px;margin:0 0 12px}li{margin-bottom:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.two{grid-template-columns:1fr}.bar{grid-template-columns:90px 1fr 56px}}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:20px;padding:2px 10px;font-size:.82rem;color:var(--mut)}
+.note{font-size:.82rem;color:var(--mut);margin-top:26px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+
+<section id="intro">
+  <h1>¿Cómo manejas los conflictos?</h1>
+  <p class="mut">Basado en el Modelo Thomas-Kilmann (1974). Son 10 situaciones del día a día en una organización. En cada una, elige la reacción que <b>más se parezca a lo que harías realmente</b>, no a lo que crees que sería lo ideal.</p>
+  <div class="card">
+    <p><b>Al final obtendrás:</b> tu estilo predominante, tu ubicación en el mapa de asertividad y cooperación, y una retroalimentación con fortalezas, riesgos y recomendaciones.</p>
+    <button class="btn" id="start">Empezar</button>
+  </div>
+</section>
+
+<section id="quiz" class="hide">
+  <div class="prog"><i id="pb"></i></div>
+  <div class="card">
+    <p class="mut" id="cnt"></p>
+    <p class="sit" id="sit"></p>
+    <div id="opts"></div>
+    <div class="nav">
+      <button class="btn alt" id="back">Anterior</button>
+      <button class="btn" id="next" disabled>Siguiente</button>
+    </div>
+  </div>
+</section>
+
+<section id="result" class="hide"></section>
+
+<p class="note">Cuestionario didáctico creado para una exposición. Es una adaptación con situaciones propias y no reemplaza el instrumento oficial TKI de CPP, Inc.</p>
+</main>
+
+<script>
+const S={
+ comp:{n:"Competidor",c:"var(--comp)",pos:"Asertivo y no cooperativo",
+  d:"Buscas satisfacer tus propios intereses sin considerar los de la otra parte. Defiendes tu posición con firmeza.",
+  f:["Rápido y decisivo cuando hay que actuar","Útil en emergencias","Proteges tus derechos frente a quien se aprovecha"],
+  l:["Puede dañar relaciones y generar resentimiento","Puede sofocar la creatividad y la iniciativa del equipo"],
+  t:"Antes de imponer tu postura, pregúntate si el tema realmente lo amerita. Reserva este modo para emergencias y para protegerte de abusos."},
+ col:{n:"Colaborador",c:"var(--col)",pos:"Asertivo y cooperativo",
+  d:"Trabajas con la otra persona para encontrar una solución que satisfaga a ambos. Buscas ir al fondo del problema.",
+  f:["Soluciones creativas","Fortalece relaciones y genera compromiso mutuo","Ideal para problemas complejos y relaciones a largo plazo"],
+  l:["Requiere tiempo y energía","No siempre es posible","Puede percibirse como pérdida de tiempo en temas triviales"],
+  t:"No todo conflicto merece una conversación larga. Aprende a distinguir cuándo el tema es complejo e importante y cuándo basta una solución rápida."},
+ cmp:{n:"Compromiso",c:"var(--cmp)",pos:"Punto intermedio",
+  d:"Buscas una solución oportuna y mutuamente aceptable en la que ambas partes ceden algo.",
+  f:["Rápido y práctico","Mantiene la paz","Útil cuando hay presión de tiempo o poder similar"],
+  l:["Ninguna parte queda completamente satisfecha","Puede ser una solución superficial","Puede llevar a acuerdos costosos"],
+  t:"Antes de repartir la diferencia, revisa si hay una opción que beneficie a ambos del todo. Si el tiempo lo permite, prueba con colaboración."},
+ elu:{n:"Eludir",c:"var(--elu)",pos:"Ni asertivo ni cooperativo",
+  d:"No abordas el conflicto: lo aplazas o te apartas de él.",
+  f:["Te da tiempo para pensar y calmar los ánimos","Evita conflictos innecesarios","Útil cuando el problema es trivial"],
+  l:["Los problemas no resueltos crecen","Puede percibirse como falta de liderazgo","Puede crear sensación de andar de puntillas"],
+  t:"Distingue entre pausar y huir. Si el tema es importante, ponle fecha para abordarlo y prepara qué vas a decir."},
+ acc:{n:"Complaciente",c:"var(--acc2)",pos:"No asertivo pero cooperativo",
+  d:"Dejas de lado tus intereses para satisfacer los de la otra persona.",
+  f:["Mantiene la armonía y fortalece relaciones","Útil cuando estás equivocado o el tema no te importa","Muestra flexibilidad"],
+  l:["Puede generar resentimiento si es constante","La otra parte puede aprovecharse","Priva a la empresa de tus contribuciones"],
+  t:"Practica expresar tu opinión con frases cortas y claras. Ceder debe ser una decisión consciente, no un reflejo."}
+};
+const Q=[
+["Un compañero entrega tarde su parte de un trabajo en equipo y eso afecta la nota de todos.",[
+ ["Le exijo que cumpla y dejo claro que no pienso asumir las consecuencias.","comp"],
+ ["Hablo con él para entender qué pasa y buscamos juntos cómo recuperar el tiempo.","col"],
+ ["Acordamos que entregue una versión mínima ya y complete el resto después.","cmp"],
+ ["Prefiero no tocar el tema por ahora; quizá se arregle solo.","elu"],
+ ["Hago su parte yo mismo para que el grupo no salga perjudicado.","acc"]]],
+["Dos áreas de la empresa discuten por cómo repartir el presupuesto del mes.",[
+ ["Defiendo que mi área tiene prioridad y presento argumentos para ganar.","comp"],
+ ["Propongo analizar las necesidades de ambas áreas para encontrar una distribución que sirva a las dos.","col"],
+ ["Sugiero dividir el presupuesto a partes casi iguales para cerrar el tema.","cmp"],
+ ["Me aparto de la discusión; que decida otra persona.","elu"],
+ ["Dejo que la otra área se quede con más; prefiero evitar tensiones.","acc"]]],
+["Tu jefe te asigna un plan de trabajo que consideras equivocado.",[
+ ["Le digo con firmeza que está mal y que lo haré a mi manera.","comp"],
+ ["Pido una reunión para revisar el plan juntos y construir una mejor versión.","col"],
+ ["Le propongo aplicar parte de su plan y parte de mi idea.","cmp"],
+ ["No digo nada y dejo pasar el tema.","elu"],
+ ["Lo hago como él lo pide, aunque no esté de acuerdo.","acc"]]],
+["Un cliente reclama algo que ya se había aclarado con él.",[
+ ["Le muestro los documentos que prueban que tengo la razón.","comp"],
+ ["Lo escucho, reviso qué falló en la comunicación y construimos una solución que lo deje satisfecho.","col"],
+ ["Le ofrezco una compensación parcial para cerrar el reclamo.","cmp"],
+ ["Paso el caso a otra persona del equipo.","elu"],
+ ["Le doy la razón y acepto lo que pide para no perder el cliente.","acc"]]],
+["Surge una discusión sobre quién debe liderar un proyecto importante.",[
+ ["Me postulo con firmeza; me siento la persona indicada.","comp"],
+ ["Propongo definir juntos criterios y roles para que el liderazgo se asigne según fortalezas.","col"],
+ ["Propongo turnarnos el liderazgo por etapas.","cmp"],
+ ["Prefiero no involucrarme en esa discusión.","elu"],
+ ["Apoyo a quien más quiera el puesto.","acc"]]],
+["Un compañero critica tu forma de trabajar delante de todos.",[
+ ["Respondo de inmediato y defiendo mi método sin ceder.","comp"],
+ ["Le pido hablar después, escucho su punto y busco una forma de trabajar que funcione para ambos.","col"],
+ ["Reconozco parte de su crítica y defiendo otra parte.","cmp"],
+ ["Cambio de tema y dejo que pase.","elu"],
+ ["Le doy la razón y ajusto mi forma de trabajar sin discutir.","acc"]]],
+["Hay que fijar el horario de una reunión y nadie coincide.",[
+ ["Impongo el horario que me conviene.","comp"],
+ ["Reviso las agendas de todos y busco una franja que funcione para la mayoría sin sacrificar a nadie.","col"],
+ ["Propongo un horario intermedio donde todos cedan un poco.","cmp"],
+ ["Pospongo la decisión hasta que alguien más la tome.","elu"],
+ ["Me adapto al horario que prefieran los demás.","acc"]]],
+["Descubres que cometiste un error que afecta el trabajo de otra persona.",[
+ ["Explico que fue por circunstancias externas y que no es tan grave.","comp"],
+ ["Lo comunico de inmediato y propongo con la otra persona un plan para corregirlo.","col"],
+ ["Reconozco el error y ofrezco compensarlo en parte.","cmp"],
+ ["Espero a ver si alguien lo nota.","elu"],
+ ["Admito el error y asumo toda la corrección.","acc"]]],
+["Dos personas de tu equipo pelean y el ambiente se pone tenso.",[
+ ["Intervengo y digo quién tiene la razón para terminar el problema.","comp"],
+ ["Los reúno para que expresen sus intereses y encuentren un acuerdo que les sirva.","col"],
+ ["Les pido que cada uno ceda algo para volver al trabajo.","cmp"],
+ ["Me mantengo al margen; no es mi conflicto.","elu"],
+ ["Calmo a los dos dándoles la razón en lo que dicen.","acc"]]],
+["Un proveedor propone un precio que no te conviene y hay poco tiempo para decidir.",[
+ ["Rechazo la oferta y exijo mi precio, o busco otro proveedor.","comp"],
+ ["Explico mis necesidades y exploro con él opciones que beneficien a ambos, como volumen, plazos o forma de pago.","col"],
+ ["Propongo un precio a la mitad de camino entre su oferta y la mía.","cmp"],
+ ["Dejo la negociación en pausa y la retomo más adelante.","elu"],
+ ["Acepto su precio para cerrar el trato rápido.","acc"]]]
+];
+const $=id=>document.getElementById(id);
+let cur=0,ans=[],order=[];
+function shuf(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function start(){cur=0;ans=[];order=Q.map(q=>shuf(q[1]));$("intro").classList.add("hide");$("result").classList.add("hide");$("quiz").classList.remove("hide");show();window.scrollTo(0,0)}
+function show(){
+ $("cnt").textContent="Situación "+(cur+1)+" de "+Q.length;
+ $("pb").style.width=(cur/Q.length*100)+"%";
+ $("sit").textContent=Q[cur][0];
+ const box=$("opts");box.innerHTML="";
+ order[cur].forEach(o=>{const b=document.createElement("button");b.className="opt"+(ans[cur]===o[1]?" sel":"");b.textContent=o[0];
+  b.onclick=()=>{ans[cur]=o[1];[...box.children].forEach(x=>x.classList.remove("sel"));b.classList.add("sel");$("next").disabled=false};box.appendChild(b)});
+ $("next").disabled=!ans[cur];
+ $("next").textContent=cur===Q.length-1?"Ver mi resultado":"Siguiente";
+ $("back").style.visibility=cur===0?"hidden":"visible";
+}
+$("start").onclick=start;
+$("back").onclick=()=>{if(cur>0){cur--;show()}};
+$("next").onclick=()=>{if(cur<Q.length-1){cur++;show()}else result()};
+function lvl(n){return n>=4?"Alto":n<=1?"Bajo":"Medio"}
+function result(){
+ const sc={comp:0,col:0,cmp:0,elu:0,acc:0};ans.forEach(a=>sc[a]++);
+ const keys=Object.keys(sc).sort((a,b)=>sc[b]-sc[a]);
+ const top=keys.filter(k=>sc[k]===sc[keys[0]]);
+ const sec=top.length===1?keys.filter(k=>sc[k]===sc[keys[1]]&&k!==keys[0])[0]:null;
+ const N=Q.length;
+ const dx=((sc.col+sc.acc)-(sc.comp+sc.elu))/N, dy=((sc.comp+sc.col)-(sc.elu+sc.acc))/N;
+ const px=50+44*dx, py=50-44*dy;
+ const main=S[top[0]];
+ let h=`<div class="card"><span class="tag">${top.length>1?"Estilos predominantes (empate)":"Tu estilo predominante"}</span>
+ <div class="res-title" style="color:${main.c}">${top.map(k=>S[k].n).join(" y ")}</div>
+ <p class="mut">${top.length>1?"Tienes un perfil equilibrado entre estos estilos.":main.pos+". "+main.d}</p>
+ ${sec?`<p>Estilo secundario: <b>${S[sec].n}</b> (${sc[sec]} de ${N} respuestas).</p>`:""}
+ <h2>Tu ubicación en el mapa</h2>
+ <div class="map">
+  <div class="q" style="left:0;top:0;color:var(--comp)">Competidor</div>
+  <div class="q" style="right:0;top:0;color:var(--col)">Colaborador</div>
+  <div class="q" style="left:50%;top:50%;transform:translate(-50%,-110%);color:var(--cmp)">Compromiso</div>
+  <div class="q" style="left:0;bottom:0;color:var(--elu)">Eludir</div>
+  <div class="q" style="right:0;bottom:0;color:var(--acc2)">Complaciente</div>
+  <div class="dot" id="dot" style="left:50%;top:50%"></div>
+ </div>
+ <div class="axl">Izquierda a derecha: cooperación (menos a más). Abajo a arriba: asertividad (menos a más).</div>
+ <h2>Tu puntaje por estilo</h2>`;
+ keys.forEach(k=>{h+=`<div class="bar"><span>${S[k].n}</span><span class="t"><i style="width:${sc[k]/N*100}%;background:${S[k].c}"></i></span><span>${sc[k]}/${N} · ${lvl(sc[k])}</span></div>`});
+ h+=`<p class="mut" style="font-size:.85rem">Niveles de este cuestionario: Alto (4 o más), Medio (2 o 3), Bajo (0 o 1). En el TKI oficial el nivel se calcula con percentiles frente a una muestra de 8,000 adultos.</p></div>`;
+ top.concat(sec?[sec]:[]).forEach(k=>{const s=S[k];
+  h+=`<h2 style="color:${s.c}">Retroalimentación: ${s.n}</h2><div class="two">
+  <div class="card"><b>Fortalezas</b><ul>${s.f.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+  <div class="card"><b>Debilidades y riesgos</b><ul>${s.l.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>
+  <div class="card" style="margin-top:14px"><b>Recomendación</b><p style="margin:6px 0 0">${s.t}</p></div>`});
+ const low=keys.filter(k=>sc[k]<=1);
+ if(low.length){h+=`<h2>Estilos que casi no usas</h2><div class="card"><p>Usaste poco: <b>${low.map(k=>S[k].n).join(", ")}</b>. Según el modelo, ningún estilo es correcto o incorrecto: la eficacia depende de la situación. Ampliar tu repertorio te permite elegir la respuesta adecuada en vez de reaccionar siempre igual.</p>
+ <p style="margin:0" class="mut">Recuerda: competir en una emergencia, colaborar en un problema complejo, comprometerse cuando el tiempo apremia, evitar cuando el problema es trivial y ceder cuando se está equivocado.</p></div>`}
+ h+=`<div class="nav" style="margin-top:20px"><button class="btn" id="again">Repetir cuestionario</button></div>`;
+ $("quiz").classList.add("hide");const r=$("result");r.innerHTML=h;r.classList.remove("hide");window.scrollTo(0,0);
+ $("again").onclick=start;
+ setTimeout(()=>{const d=$("dot");if(d){d.style.left=px+"%";d.style.top=py+"%"}},80);
+}
+</script>
+</body>
+</html>
